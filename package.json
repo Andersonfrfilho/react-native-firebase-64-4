@@ -10,6 +10,9 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-firebase/app": "16.7.0",
+    "@react-native-firebase/crashlytics": "^16.7.0",
+    "@react-native-firebase/remote-config": "^16.7.0",
     "react": "17.0.1",
     "react-native": "0.64.4"
   },

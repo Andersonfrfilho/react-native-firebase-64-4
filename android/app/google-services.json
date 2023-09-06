@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "889920897200",
+    "project_id": "isis-266021",
+    "storage_bucket": "isis-266021.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:889920897200:android:cb5d83c3dfc8382f65fb75",
+        "android_client_info": {
+          "package_name": "com.awesometsprojectjavascript"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "889920897200-01pd7kr2lh883jjs7aa6mkknafhf5m0c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOu_v9ru28lAWJn2Q7V8QhuSZtgfN6hGA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "889920897200-01pd7kr2lh883jjs7aa6mkknafhf5m0c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
