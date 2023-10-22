@@ -6,9 +6,10 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, {useRef, useState} from 'react';
 import type {Node} from 'react';
 import {
+  Linking,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -17,7 +18,7 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-
+import {WebView} from 'react-native-webview';
 import {
   Colors,
   DebugInstructions,
@@ -32,15 +33,6 @@ const Section = ({children, title}): Node => {
     <View style={styles.sectionContainer}>
       <Text
         style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
           styles.sectionDescription,
           {
             color: isDarkMode ? Colors.light : Colors.dark,
@@ -53,39 +45,41 @@ const Section = ({children, title}): Node => {
 };
 
 const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
+  const [webViewUrl, setWebViewUrl] = useState(null);
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  const handleNavigationStateChange = navState => {
+    const {url} = navState;
+    console.log(
+      '#############',
+      url,
+      url && url !== 'about:blank' && url !== webViewUrl,
+    );
+
+    if (url && url !== 'about:blank' && url !== webViewUrl) {
+      // Abre links externos em um navegador externo
+      Linking.openURL('com.br.smiles.hml://Home');
+    }
+
+    setWebViewUrl(url);
   };
 
+  const htmlString = `
+  <html>
+    <body>
+      <a href="https://example.com">Abrir exemplo</a>
+    </body>
+  </html>
+`;
+
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
+    <SafeAreaView style={{flex: 1}}>
+      <StatusBar barStyle={'light-content'} />
+      <WebView
+        // ref={webView}
+        source={{html: htmlString}}
+        onNavigationStateChange={handleNavigationStateChange}
+      />
+      <Text>asdfasdf</Text>
     </SafeAreaView>
   );
 };
